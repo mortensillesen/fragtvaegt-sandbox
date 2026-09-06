@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "takster": {
+      "command": "python3",
+      "args": ["kursus/mcp/takstserver.py"]
+    }
+  }
+}

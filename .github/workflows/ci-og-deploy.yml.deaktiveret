@@ -1,0 +1,49 @@
+# Modul 09: kvalitetsport og deploy.
+# Filen er slaaet fra, fordi GitHub kun laeser workflows med endelsen .yml eller .yaml.
+# Aktivering:  git mv .github/workflows/ci-og-deploy.yml.deaktiveret .github/workflows/ci-og-deploy.yml
+# Verificeret mod actions/starter-workflows/pages/static.yml, 2026-09-06.
+name: Test og deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Port, tests skal vaere groenne
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python3 -m pip install -r requirements-dev.txt
+      - run: python3 -m pytest -q
+
+  deploy:
+    name: Deploy site/ til GitHub Pages
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Skriv byggetidspunkt ind i siden
+        run: sed -i "s|<span>ukendt</span>|<span>$(date -u +%Y-%m-%dT%H:%MZ) fra ${GITHUB_SHA::7}</span>|" site/index.html
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v5

@@ -1,0 +1,11 @@
+#!/bin/sh
+# Kvalitetsport: afviser en commit, hvis testene fejler.
+# Aktivering:   git config core.hooksPath kursus/hooks
+# Deaktivering: git config --unset core.hooksPath
+echo "pre-commit: koerer tests ..."
+if python3 -m pytest -q --no-header -p no:cacheprovider; then
+  echo "pre-commit: tests bestaaet, commit tilladt"
+  exit 0
+fi
+echo "pre-commit: tests fejlede, commit afvist" >&2
+exit 1

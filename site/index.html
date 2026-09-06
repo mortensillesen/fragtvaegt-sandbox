@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fragtvaegt-sandbox</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #1a1a1a; }
+    table { border-collapse: collapse; }
+    td, th { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+    code { background: #f4f4f4; padding: .1rem .3rem; }
+  </style>
+</head>
+<body>
+  <h1>fragtvaegt-sandbox</h1>
+  <p>Denne side deployes af workflowen i modul 09, når testene er grønne. Ser du siden, er porten passeret.</p>
+  <h2>Regler</h2>
+  <table>
+    <tr><th></th><th>fly</th><th>vej</th><th>soe</th></tr>
+    <tr><td>Volumenvægt, divisor</td><td>6000</td><td>3000</td><td>1000</td></tr>
+    <tr><td>Afrunding</td><td>op til 0,5 kg</td><td>op til hele kg</td><td>op til hele kg</td></tr>
+    <tr><td>Minimum</td><td>1 kg</td><td>30 kg</td><td>100 kg</td></tr>
+  </table>
+  <p>Prøv selv: <code>python3 -m fragtvaegt fly 2 60x40x50:12</code></p>
+  <p id="build">Bygget: <span>ukendt</span></p>
+</body>
+</html>
