@@ -6,7 +6,7 @@ name: Test og deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, "arbejde/modul-09"]
   workflow_dispatch:
 
 permissions:
